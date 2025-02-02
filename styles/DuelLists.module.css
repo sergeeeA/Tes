@@ -1,0 +1,168 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.wrapper {
+  background-color: #000;
+  min-height: 100vh;
+  padding-top: 1rem;
+  margin-bottom: 5rem;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+/* Sticky header container */
+.pageHeaderContainer {
+  border-bottom: 1px solid #2f3336;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 0;
+z-index: 1;
+  background-color: #00000069; /* Match the background color */
+  backdrop-filter: blur(2px); /* Apply background blur */
+}
+/* Adjust the history container for scrolling */
+.historyContainer {
+  flex-grow: 1; /* Take up remaining space */
+  padding-top: 1rem; /* Add some spacing below the sticky header */
+}
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 180px; /* Space between the tabs */
+}
+
+
+.activeTab {
+  font-weight: bold;
+  text-decoration: none; /* Remove the default underline */
+  position: relative;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Thickness of the bottom outline */
+  border-radius: 5px;
+  background-color: #1da1f2; /* Blue outline color */
+}
+
+.pageTitle {
+  font-size: 1rem;
+  font-weight: normal;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 0; /* Remove the bottom margin for better spacing control */
+}
+
+/* Ensure the content below the header scrolls */
+.duelContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Take up remaining space */
+  padding-top: 1rem; /* Add some spacing below the sticky header */
+}
+
+
+
+.duelCard {
+  background-color: #15181c00; /* Dark gray card background */
+  border-top: 1px solid #2f3336;
+  padding: 5px;
+  transition: background-color 0.2s ease;
+  animation: slideIn 0.1s ease-in-out forwards;
+  opacity: 0; /* Start with the card invisible */
+}
+
+@keyframes slideIn {
+  0% {
+    
+    opacity: 0;
+  }
+  100% {
+    
+
+    opacity: 1;
+  }
+}
+
+.duelCard:hover {
+  background-color: #0b0c0e; /* Slightly lighter on hover */
+}
+
+.duelHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.nftId {
+  position: relative;
+bottom: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff; /* White for display name */
+}
+.creator {
+  position: relative;
+  bottom: 10px;
+  font-size: 0.9rem;
+  color: #71767b; /* Light gray for @handle */
+}
+
+.message {
+  bottom: 25px;
+  left:   47px;
+  position: relative;
+
+  font-size: 0.9rem;
+  color: #e7e9ea; /* Light gray for tweet text */
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  word-wrap: break-word; /* Ensures long words or URLs break properly */
+  white-space: normal; /* Allows text to wrap */
+ 
+}
+.winner {
+
+  color: #09ff00; /* Light gray for tweet text */
+
+}
+.loser {
+
+  color: #ff0000; /* Light gray for tweet text */
+
+}
+/* No Duels Message */
+.noDuels {
+  text-align: center;
+  color: #657786; /* Gray text */
+  font-size: 1rem;
+}
+
+.swordSymbol {
+  margin-top: 10px;
+  font-size: 30px; /* Adjust size as needed */
+  text-align: center;
+  color: #71767b; /* Gray text */
+}
+.addressWithImage {
+  display: flex;
+  align-items: center;
+}
+
+.addressImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Optional: to make the image circular */
+  margin-right: 8px; /* Space between the image and the name */
+}

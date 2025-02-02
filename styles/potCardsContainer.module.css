@@ -1,0 +1,16 @@
+.potCardsContainer {
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 5px; /* Decreased space between the cards (adjust as needed) */
+  overflow: hidden;
+  align-items: center; /* Center items vertically within the container */
+  justify-content: center; /* Center items horizontally within the container */
+  width: 100%; /* Set the width of the container */
+  border-radius: 1rem; /* Rounded corners */
+  margin: 5px auto; /* Center container horizontally with margin above and below */
+  flex-direction: row; /* Arrange items in a row (horizontal layout) */
+}
+.potCardsContainer.closed {
+  display: none;
+}

@@ -1,0 +1,168 @@
+.createDuelContainer {
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 16px; /* Rounded corners */
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* White text */
+    animation: Fade 0.35s forwards ease-in; /* Apply animation */
+  }
+  
+  @keyframes Fade {
+    0% {
+      transform: translateX(100px); /* Start position (left) */
+      opacity: 0; /* Start with opacity 0 */
+    }
+    50%{ 
+      transform: translateX(0); /* End position (original) */
+      
+    }
+    100% {
+ 
+      opacity: 1; /* End with full opacity */
+    }
+  }
+
+ 
+  .message {
+    bottom: 25px;
+    left:   47px;
+    position: relative;
+  
+    font-size: 0.9rem;
+    color: #e7e9ea; /* Light gray for tweet text */
+    margin: 0.5rem 0;
+    line-height: 1.5;
+    word-wrap: break-word; /* Ensures long words or URLs break properly */
+    white-space: normal; /* Allows text to wrap */
+    animation: Fade 0.75s forwards ease-in; /* Apply animation */
+  }
+  .createtitle{
+    position: relative;
+    bottom: 10px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff; /* White for display name */
+      animation: Fade 0.5s forwards ease-in; /* Apply animation */
+  }
+  .canceltitle{
+    position: relative;
+    bottom: 10px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff; /* White for display name */
+      animation: Fade 0.5s forwards ease-in; /* Apply animation */
+  }
+.cancelcontainer{
+  border-radius: 16px; /* Rounded corners */
+  border: 1px solid #2f3336; /* Dark border */
+  padding: 20px;
+  word-wrap: break-word; /* Ensures long words or URLs break properly */
+  white-space: normal; /* Allows text to wrap */
+  margin: 20px;
+  animation: Fade 0.55s forwards ease-in; /* Apply animation */
+}
+  .createDuelForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: Fade 0.55s forwards ease-in; /* Apply animation */
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: Fade 0.45s forwards ease-in; /* Apply animation */
+  }
+  
+  .formGroup label {
+    font-weight: bold;
+    color: #71767b; /* Light gray for labels */
+  }
+  
+  .formGroup input {
+    padding: 12px;
+    border: 1px solid #2f3336; /* Dark border */
+    border-radius: 8px; /* Slightly rounded edges */
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* White text */
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .formGroup input::placeholder {
+    color: #71767b; /* Light gray placeholder text */
+  }
+  
+  .formGroup input:focus {
+    border-color: #1d9bf0; /* X's blue accent color */
+  }
+  
+  .submitButton {
+    padding: 12px;
+    background-color: #1d9bf0; /* X's blue accent color */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Fully rounded edges */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+    animation: Fade 0.75s forwards ease-in; /* Apply animation */
+  }
+  
+  .submitButton:hover {
+    background-color: #1a8cd8; /* Slightly darker blue on hover */
+  }
+  
+  .submitButton:disabled {
+    background-color: #1d9bf0; /* X's blue accent color */
+    opacity: 0.5; /* Dimmed when disabled */
+    cursor: not-allowed;
+  }
+
+  .cancelButton {
+    padding: 12px;
+    background-color: #ff0000; /* X's blue accent color */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Fully rounded edges */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+    animation: Fade 0.75s forwards ease-in; /* Apply animation */
+
+  }
+  
+  .cancelButton:hover {
+    background-color: #d61616; /* Slightly darker blue on hover */
+  }
+  
+  .cancelButton:disabled {
+    background-color: #d61616; /* X's blue accent color */
+    opacity: 0.5; /* Dimmed when disabled */
+    cursor: not-allowed;
+  }
+  .addressWithImage {
+    display: flex;
+    align-items: center;
+    animation: Fade 0.45s forwards ease-in; /* Apply animation */
+  }
+  
+  .addressImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Optional: to make the image circular */
+    margin-right: 8px; /* Space between the image and the name */
+    animation: Fade 0.45s forwards ease-in; /* Apply animation */
+  }
+
+ .loadingSpinner{
+  text-align: center;
+  font-size: 25px
+ }
+ 

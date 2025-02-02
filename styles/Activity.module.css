@@ -1,0 +1,96 @@
+.wrapper {
+    font-family: 'Montserrat', sans-serif;
+
+  }
+  
+  .pageTitle {
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    max-height: 20px;
+  }
+  
+  .activeTab {
+    font-weight: bold;
+  }
+  
+  .duelList {
+
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    padding: 22px;
+  }
+  
+  .duelContainer {
+
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #2f3336;
+    border-radius: 8px;
+    text-align: left;
+
+    transform: translateX(-50px); /* Start from the left */
+    animation: SlideIn 0.5s forwards; /* Apply animation */
+  }
+  
+  @keyframes SlideIn {
+    0% {
+
+      transform: translateX(-100px) scaleX(1.5); /* Start position (left) */
+      opacity: 0; /* Start with opacity 0 */
+    }
+
+    50%{
+      border: 1px solid #fffb00;
+      background-color: #ffe6009d;
+
+  
+    }
+
+    100% {
+ 
+      transform: translateX(0) scale(1); /* End position (original) */
+      opacity: 1; /* End with full opacity */
+    }
+  }
+
+  .duelItem {
+    margin-bottom: 5px;
+  }
+  
+  .duelDetails div {
+    margin-bottom: 6px; /* Increase space between lines for readability */
+  }
+  
+
+  .winner {
+    color: #09ff00; /* Green color for winner */
+
+  }
+  
+  .loser {
+    color: #ff0000; /* Red color for loser */
+  }
+  
+  .greyed {
+    color: #657786; /* Gray text for token IDs */
+    font-size: 14px; /* Smaller size for token IDs */
+  }
+  
+  .duelItem p {
+    margin: 0; /* Remove any default margins around the paragraph */
+    font-size: 16px; /* Adjust text size for readability */
+  }
+  
+  .duelDetails {
+    font-size: 14px; /* Smaller font size for contract and other details */
+  }
+  
+  .duelDetails strong {
+    color: #2f3336; /* Dark color for the "NFT Contract:" label */
+  }
+  
