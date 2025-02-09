@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import DuelLists from '../components/DuelLists';
 import WalletConnectBtn from '../components/WalletConnectBtn';
+
+import Guide from '../components/Guide';
 import CreateDuel from '../components/CreateDuel';
 import CancelDuel from '../components/CancelDuel';
-import ChallengeDuel from '../components/ChallengeDuel';
+
 import Activity from '../components/Activity';
 import homeStyle from '../styles/Home.module.css';
 
 export default function Home() {
   const [showCreateDuel, setShowCreateDuel] = useState(false);
   const [showCancelDuel, setShowCancelDuel] = useState(false);
-
+  const [showGuide, setShowGuide] = useState(false);
   // Callback to close the CreateDuel modal
   const handleCreateDuelComplete = () => {
     setShowCreateDuel(false);
@@ -18,8 +20,10 @@ export default function Home() {
 
   return (
     <div className={homeStyle.wrapper}>
-      <div className={homeStyle.leftWrapper}>
-        <div className={homeStyle.sideContainer}>
+
+      {/* Main content in the middle */}
+      <div className={homeStyle.mainContent}>
+      <div className={homeStyle.sideContainer}>
           <img
             src="../logo.png" // Adjust the path based on where your PNG is located
             alt="Logo"
@@ -28,10 +32,6 @@ export default function Home() {
           />
         </div>
         <Activity />
-      </div>
-
-      {/* Main content in the middle */}
-      <div className={homeStyle.mainContent}>
         <div className={homeStyle.scrollableContent}>
           <DuelLists />
         </div>
@@ -41,13 +41,19 @@ export default function Home() {
       <div className={homeStyle.rightWrapper}>
         <div className={homeStyle.sideContainer}>
           <WalletConnectBtn />
-
+          <button
+            className={homeStyle.Button}
+            onClick={() => setShowGuide(true)}
+          >
+            Guide
+          </button>
           <button
             className={homeStyle.createDuelButton}
             onClick={() => setShowCreateDuel(true)}
           >
             Create Duel
           </button>
+          
           <button
             className={homeStyle.cancelDuelButton}
             onClick={() => setShowCancelDuel(true)}
@@ -58,6 +64,26 @@ export default function Home() {
       </div>
 
       {/* Modals */}
+      {showGuide && (
+        <div
+          className={homeStyle.modalOverlay}
+          onClick={() => setShowGuide(false)} // Close modal when overlay is clicked
+        >
+          <div
+            className={homeStyle.modalContent}
+            onClick={(e) => e.stopPropagation()} // Prevent clicks inside the modal from closing it
+          >
+            <Guide/>
+            <button
+              className={homeStyle.closeButton}
+              onClick={() => setShowGuide(false)}
+            >
+              X
+            </button>
+          </div>
+        </div>
+      )}
+
       {showCreateDuel && (
         <div
           className={homeStyle.modalOverlay}
@@ -100,21 +126,29 @@ export default function Home() {
 
       {/* Footer */}
       <div className={homeStyle.footer}>
-        <button
-          className={homeStyle.createDuelButton}
-          onClick={() => setShowCreateDuel(true)}
-        >
-          Create Duel
-        </button>
+        
+ 
 
         <button
-          className={homeStyle.cancelDuelButton}
+          className={homeStyle.cancelDuelButtonMobile}
           onClick={() => setShowCancelDuel(true)}
         >
           Cancel Duel
         </button>
-
+        <button
+          className={homeStyle.createDuelButtonMobile}
+          onClick={() => setShowCreateDuel(true)}
+        >
+          Create Duel
+        </button>
+   
         <WalletConnectBtn />
+        <button
+            className={homeStyle.ButtonMobile}
+            onClick={() => setShowGuide(true)}
+          >
+            Guide
+          </button>
       </div>
     </div>
   );

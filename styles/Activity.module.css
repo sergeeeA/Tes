@@ -1,12 +1,19 @@
 .wrapper {
     font-family: 'Montserrat', sans-serif;
-
+    font-size: 11px; /* Smaller font size for contract and other details */
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    user-select: none;  
+    -webkit-user-drag: none; /* Prevents dragging in WebKit browsers */
+    -moz-user-select: none;  /* Prevents text selection in Firefox */
+    -ms-user-select: none;   
   }
   
   .pageTitle {
     font-weight: bold;
     text-align: center;
-    font-size: 18px;
+    margin: 5px;
     max-height: 20px;
   }
   
@@ -16,32 +23,31 @@
   
   .duelList {
 
-    margin: 25px;
+    
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-
-
-    padding: 22px;
+    place-content: center;
   }
   
   .duelContainer {
+    max-height: 80px;
+  
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #706c539a;
+    border-radius: 5px;
+    text-align: center;
 
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #2f3336;
-    border-radius: 8px;
-    text-align: left;
 
-    transform: translateX(-50px); /* Start from the left */
-    animation: SlideIn 0.5s forwards; /* Apply animation */
+    animation: SlideIn 0.5s forwards; 
   }
   
   @keyframes SlideIn {
     0% {
 
-      transform: translateX(-100px) scaleX(1.5); /* Start position (left) */
-      opacity: 0; /* Start with opacity 0 */
+      transform: translateY(-100px) scaleX(0.75); 
+      opacity: 0; 
     }
 
     50%{
@@ -53,13 +59,13 @@
 
     100% {
  
-      transform: translateX(0) scale(1); /* End position (original) */
+      transform: translateY(0) scale(1); /* End position (original) */
       opacity: 1; /* End with full opacity */
     }
   }
 
   .duelItem {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
   }
   
   .duelDetails div {
@@ -68,29 +74,27 @@
   
 
   .winner {
-    color: #09ff00; /* Green color for winner */
+    color: #09ff00;
 
   }
   
   .loser {
-    color: #ff0000; /* Red color for loser */
+    color: #ff0000;
   }
   
   .greyed {
-    color: #657786; /* Gray text for token IDs */
-    font-size: 14px; /* Smaller size for token IDs */
+    color: #657786; 
+
   }
   
   .duelItem p {
-    margin: 0; /* Remove any default margins around the paragraph */
-    font-size: 16px; /* Adjust text size for readability */
+    margin: 0; 
+ 
   }
   
-  .duelDetails {
-    font-size: 14px; /* Smaller font size for contract and other details */
-  }
+
   
   .duelDetails strong {
-    color: #2f3336; /* Dark color for the "NFT Contract:" label */
+    color: #2f3336; 
   }
   

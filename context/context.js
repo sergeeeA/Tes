@@ -17,8 +17,8 @@ export const AppProvider = ({ children }) => {
       if (lotteryContract) {
         fetchActiveDuelIds();
       }
-    }, ); // Delay of 500ms before fetching
-  
+    }, 500); // Delay of 500ms before fetching
+    
     return () => clearTimeout(debounceTimeout); // Cleanup on unmount or when contract changes
   }, [lotteryContract]);
   
@@ -63,37 +63,46 @@ export const AppProvider = ({ children }) => {
       }
     }
   };
- // Fetch Duel History with pagination
- const fetchDuelHistory = async (page) => {
-  if (!lotteryContract) return;
 
-  try {
-    // Get the current duelCounter value to use as the pageSize
-    const duelCounter = await lotteryContract.methods.duelCounter().call();
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    // Call getPaginatedDuelHistory with the current page and duelCounter as pageSize
-    const history = await lotteryContract.methods.getPaginatedDuelHistory(page, duelCounter).call();
+  const fetchDuelHistory = async (page) => {
+    if (!lotteryContract) return;
+  
+    try {
+      // Get the current duelCounter value to use as the pageSize
+      const duelCounter = await lotteryContract.methods.duelCounter().call();
+  
+      // Call getPaginatedDuelHistory with the current page and duelCounter as pageSize
+      const history = await lotteryContract.methods.getPaginatedDuelHistory(page, duelCounter).call();
+  
+      // Format the data to match frontend display expectations
+      const formattedHistory = history.map(duel => ({
+        duelId: duel.duelId.toString(),
+        winner: duel.winner,
+        loser: duel.loser,
+        nftContractAddress: duel.nftContractAddress,
+        winnerTokenId: duel.winnerTokenId.toString(),
+        loserTokenId: duel.loserTokenId.toString(),
+      }));
+  
+      // Sort the duels by duelId in descending order to get the most recent first
+      const sortedHistory = formattedHistory.sort((a, b) => b.duelId - a.duelId);
+  
+      // Store the sorted duel history (without filtering by address)
+      setDuelHistory(sortedHistory);
+  
+    } catch (error) {
+      // If rate limit is exceeded, retry after a delay
+      if (error.message.includes('429')) {
 
-    // Format the data to match frontend display expectations
-    const formattedHistory = history.map(duel => ({
-      duelId: duel.duelId.toString(),
-      winner: duel.winner,
-      loser: duel.loser,
-      nftContractAddress: duel.nftContractAddress,
-      winnerTokenId: duel.winnerTokenId.toString(),
-      loserTokenId: duel.loserTokenId.toString(),
-    }));
-
-    // Sort the duels by duelId in descending order to get the most recent first
-    const sortedHistory = formattedHistory.sort((a, b) => b.duelId - a.duelId);
-
-    // Store the sorted duel history (without filtering by address)
-    setDuelHistory(sortedHistory);
-
-  } catch (error) {
-    console.error('Error fetching duel history:', error);
-  }
-};
+        await delay(1000); // Wait for 1 second before retrying
+        fetchDuelHistory(page); // Retry fetching duel history
+      } else {
+        console.error('Error fetching duel history:', error);
+      }
+    }
+  };
 
 
 
@@ -107,17 +116,17 @@ const challengeDuel = async (duelId, challengerNftId, nftContractAddress) => {
   try {
     // Retrieve the DUEL_FEE amount from the contract
 
-
+    const duelFee = await lotteryContract.methods.DUEL_FEE().call();
     // Estimate the gas for the challengeDuel function
     const gasEstimate = await lotteryContract.methods
       .challengeDuel(duelId, challengerNftId, nftContractAddress)
-      .estimateGas({ from: address });
+      .estimateGas({ from: address, value: duelFee });
 
       
     // Send the transaction with the estimated gas and DUEL_FEE amount
     await lotteryContract.methods
       .challengeDuel(duelId, challengerNftId, nftContractAddress)
-      .send({ from: address, gas: gasEstimate });
+      .send({ from: address, gas: gasEstimate, value: duelFee });
 
 
     // Optionally, refresh any relevant data after challenging the duel (e.g., fetch duels)

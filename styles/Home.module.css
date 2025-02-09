@@ -44,8 +44,7 @@ justify-content: center;
 
 /* Main content */
 .mainContent {
-  min-width: 300px;
-  max-width: 750px;
+
   margin: 0 auto;
  
   border-left: 1px solid #2f3336;
@@ -91,12 +90,12 @@ justify-self: center;
 }
 /* Right wrapper */
 .rightWrapper {
-
+  z-index: 3;
   position: fixed; /* Fixes the position relative to the viewport */
   top: 0;
   right: 0; /* Aligns the wrapper to the right side */
   bottom: 0; /* Ensure it stretches from top to bottom */
-  width: 400px; /* Set the width of the rightWrapper */
+
   display: flex;
   flex-direction: column; /* Reverses the column direction to start from the bottom */
   align-items: flex-start; /* Aligns the child elements to the start (right side) */
@@ -104,17 +103,22 @@ justify-self: center;
 }
 /* Footer Styles */
 .footer {
-  
+
   border-top: 1px solid #2f3336;
   display: none; /* Hide the footer by default */
-  background-color: #000000;
+  background-color: #00000052;
+  backdrop-filter: blur(2px); /* Apply background blur */
   color: #fff;
   padding: 10px;
   text-align: center;
   position: fixed;
-  bottom: 0;
+  bottom: -160px;
   width: 100%;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  transition: bottom 0.2s ease-out;
+}
+.footer:hover {
+  bottom: 0px;
 }
 
 /* Mobile Styles */
@@ -142,44 +146,104 @@ justify-self: center;
     width: 100%; /* Make main content full width */
   }
 }
+.createDuelButtonMobile, .cancelDuelButtonMobile, .ButtonMobile {
+  margin: 10px;
+  padding: 10px 20px;
+  border: 1px solid #706c539a;
+  background-color: #00000052;
+  color: #71767b;
+  backdrop-filter: blur(2px); /* Apply background blur */
+  border-radius: 25px; /* Fully rounded edges */
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 16px;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
+}
+.createDuelButtonMobile:hover {
+  color: white;
+  color: #000000;
+
+  transform: translateY(-5px); 
+  background-color: #ffd900; 
+}
+
+
+.cancelDuelButtonMobile:hover {
+  color: white;
+  color: #000000;
+
+  transform: translateY(-5px);
+  background-color: #da2121;
+}
+
+.ButtonMobile:hover {
+  color: #ffd900;
+
+  transform: translateY(-5px); 
+  background-color: #3b8eec; 
+}
 /* Button to trigger CreateDuel */
-.createDuelButton {
-  margin: 10px;
-  padding: 10px 20px;
-  border: 1px solid #2f3336;
-  background-color: #00000000;
-  color: #71767b;
-
-  border-radius: 25px; /* Fully rounded edges */
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
-}
-.createDuelButton:hover {
-  color: white;
-  transform: translateX(-5px); /* Start position (left) */
-  background-color: #1a8cd8; /* Slightly darker blue on hover */
-}
-
 .cancelDuelButton {
-  margin: 10px;
+  left: -5px;
+  top: -5.75px;
+  position: relative;
   padding: 10px 20px;
-  border: 1px solid #2f3336;
-  background-color: #00000000;
+  border-top: none;
+  border-bottom: 1px solid #706c539a;
+  border-left: 1px solid #706c539a;
+  border-right: 1px solid #706c539a;
+  background-color: #000000;
   color: #71767b;
 
-  border-radius: 25px; /* Fully rounded edges */
+  min-width: 150px;
+  max-width: 150px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 16px;
-  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
 }
-.cancelDuelButton:hover {
-  color: white;
-  transform: translateX(-5px); /* Start position (left) */
-  background-color: #da2121; /* Slightly darker blue on hover */
+
+.createDuelButton, .Button   {
+  left: -5px;
+  top: -5.75px;
+  position: relative;
+  padding: 10px 20px;
+  border-top: none;
+  border-bottom: none;
+  border-left: 1px solid #706c539a;
+  border-right: 1px solid #706c539a;
+  background-color: #000000;
+  color: #71767b;
+
+  min-width: 150px;
+  max-width: 150px;
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 16px;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
 }
+
+    .Button:hover {
+      color: #ffd900;
+      font-weight: bold;
+      transform: translateX(-5px); 
+      background-color: #3b8eec; 
+    }
+
+    .createDuelButton:hover {
+      color: #000000;
+      font-weight: bold;
+      transform: translateX(-5px); 
+      background-color: #ffd900; 
+    }
+
+
+    .cancelDuelButton:hover {
+      color: #000000;
+      font-weight: bold;
+      transform: translateX(-5px);
+      background-color: #da2121;
+    }
 /* Modal overlay */
 .modalOverlay {
   position: fixed;
@@ -187,57 +251,63 @@ justify-self: center;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(29, 29, 29, 0.7); /* Semi-transparent black */
+  background-color: rgba(29, 29, 29, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 4;
   
 }
 
-/* Modal content */
+
 .modalContent {
-  background-color: #000000; /* Black background */
-  padding: 20px;
-  border-radius: 16px; /* Rounded corners */
+  border: 1px solid #706c539a;
+  background-color: #000000; 
+
+  border-radius: 16px; 
  z-index: 3;
   max-width: 500px;
   width: 100%;
   position: relative;
-  animation: Fade 0.2s forwards ease-in; /* Apply animation */
+  animation: Fade 0.2s forwards ease-in;
  
 }
   
 @keyframes Fade {
   0% {
-    transform: translateX(50px); /* Start position (left) */
-    opacity: 0; /* Start with opacity 0 */
+    transform: translateX(50px); 
+    opacity: 0; 
   }
   50%{ 
-    transform: translateX(0); /* End position (original) */
+    transform: translateX(0); 
     
   }
   100% {
 
-    opacity: 1; /* End with full opacity */
+    opacity: 1;
   }
 }
 
-/* Close button */
+
 .closeButton {
   position: absolute;
   top: 10px;
   left: 10px;
   border-radius: 55px;
   padding: 10px 13px;
-  background-color: #1a1d2100;
-  border: none;
-  color: #ffffff; /* White text */
+  font-weight: bold;
+  background-color: #00000052;
+  border: 1px solid #706c539a;
+  color: #ffffff;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.15s ease-in ;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
 }
 
 .closeButton:hover {
-  background-color: #1a1d21b7;
+  color: white;
+  color: #000000;
+
+  transform: scale(1.2);
+  background-color: #d61616; /* Slightly darker blue on hover */
 }

@@ -18,19 +18,22 @@ const Activity = () => {
 
   useEffect(() => {
     let isMounted = true;
-
+  
     const fetchData = async () => {
       if (!isMounted) return;
-      await fetchAndUpdateDuelHistory();
+      await fetchAndUpdateDuelHistory(); 
     };
-
-    const interval = setInterval(fetchData, 5000);
-
+  
+   //(5 seconds)
+    const intervalId = setInterval(fetchData, 10000);
     return () => {
       isMounted = false;
-      clearInterval(interval);
+      clearInterval(intervalId); 
     };
   }, [fetchAndUpdateDuelHistory]);
+  
+  
+  
 
   // Truncation function
   const truncateAddress = (address) => {
@@ -39,7 +42,7 @@ const Activity = () => {
 
   // Sort duelHistory by duelId in descending order and get the recent duels
   const recentDuels = useMemo(() => {
-    return [...(duelHistory || [])].sort((a, b) => b.duelId - a.duelId).slice(0, 5);
+    return [...(duelHistory || [])].sort((a, b) => b.duelId - a.duelId).slice(0, 10);
   }, [duelHistory]);
 
   return (

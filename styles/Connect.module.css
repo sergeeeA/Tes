@@ -1,6 +1,6 @@
 
 .loginBtn {
-  margin-right: 20px;
+  text-align: center;
   font-size: 1rem;
   position: relative;
   background-color: transparent;
@@ -10,20 +10,25 @@
   z-index: 2;
   border: none;
 }
+.parentcontainer {
 
-.container {
-  z-index: 2;
-  padding: 5px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center; /* Horizontally center items */
-  align-items: center; /* Vertically center items */
-  border-radius: 25px;
-  transition: background-color 0.15s ease-in-out;
-  height: 100%; /* Optional: Make sure the container stretches fully */
+  display: flex; /* Enable flexbox on the body */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
-.container:hover {
-background-color: #1a1d21;
+.container {
+  margin: 5px;
+  padding: 10px 10px;
+  border: 1px solid #706c539a;
+  background-color: #000000;
+
+  color: #71767b;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 16px;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
 }

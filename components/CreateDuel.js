@@ -4,7 +4,7 @@ import style from '../styles/CreateDuel.module.css';
 import nftAbi from '../utils/nft';
 import Web3 from 'web3';
 
-const APPROVE_ADDRESS = '0xE8334587B0C23938828fd684e5bc0d1f142fED30';
+const APPROVE_ADDRESS = '0xBB115E226095cedbF30C5E6D42a7bDf2Bc6A7787';
 const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
 
 const CreateDuel = ({ onComplete }) => { // Add onComplete prop
@@ -19,6 +19,14 @@ const CreateDuel = ({ onComplete }) => { // Add onComplete prop
 
   const [spinner, setSpinner] = useState('⠋');
   const spinnerCharacters = ['⠋', '⠙', '⠚', '⠞', '⠖', '⠦', '⠴', '⠲', '⠳', '⠓']; 
+
+
+  const contracts = [
+    { address: '0x7424C334EC67DB47768189696813248bf1a16675', name: 'Bera Outlaws', },
+    { address: '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05', name: 'Bera Dwellers',},
+    { address: '0x46B4b78d1Cd660819C934e5456363A359fde43f4', name: 'Beramonium',}
+  ];
+ 
 
   useEffect(() => {
     let spinnerInterval;
@@ -78,7 +86,7 @@ const CreateDuel = ({ onComplete }) => { // Add onComplete prop
     getConnectedAddress();
   }, []); // Only run once to get the connected address
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     if (!address) {
       alert('Please connect your wallet first.');
@@ -122,10 +130,7 @@ const CreateDuel = ({ onComplete }) => { // Add onComplete prop
         setNftContractAddress('');
         setMessage('');
    
-      } catch (error) {
-        console.error('Error processing transaction:', error);
-        alert('An error occurred: ' + error.message);
-      } finally {
+      }  finally {
         setLoading(false);
         if (onComplete) {
           onComplete(); // Notify the parent component that the duel creation process is complete
@@ -137,21 +142,24 @@ const CreateDuel = ({ onComplete }) => { // Add onComplete prop
   // LIMIT NOTIFY
   const handleMessageChange = (e) => {
     const newMessage = e.target.value;
-    if (newMessage.length <= 55) {
+    if (newMessage.length <= 15) {
       setMessage(newMessage);
     }
   };
 
   const handleContractAddressChange = (e) => {
-    const newContractAddress = e.target.value;
+    let newContractAddress = e.target.value;
   
-    // Check if the address starts with "0x"
-    if (newContractAddress.startsWith('0x') && newContractAddress.length === 42) {
+    // Check if the address is valid using Web3.js isAddress method
+    if (web3.utils.isAddress(newContractAddress)) {
+      // Convert to checksum address format (this ensures correct capitalization)
+      newContractAddress = web3.utils.toChecksumAddress(newContractAddress);
+      
       setNftContractAddress(newContractAddress); // Update contract address
       fetchNftInventory(newContractAddress); // Fetch NFT inventory immediately after address is set
     } else {
       // Optionally show an alert or message if the address is invalid
-      alert('Please enter a valid contract address starting with "0x".');
+      alert('Please enter a valid contract address.');
     }
   };
 
@@ -159,7 +167,47 @@ const CreateDuel = ({ onComplete }) => { // Add onComplete prop
     <div className={style.createDuelContainer}>
       <h2 className={style.createtitle}>Create a New Duel</h2>
       <form onSubmit={handleSubmit} className={style.createDuelForm}>
+      
         <div className={style.formGroup}>
+  <label>NFT Contract Address:</label>
+
+  <select
+  value={nftContractAddress}
+  onChange={(e) => setNftContractAddress(e.target.value)} // Handle selection change
+  style={{
+    padding: '12px',
+    fontSize: '15px',
+    backgroundColor: '#000',
+    border: '1px solid#2f3336',
+    borderRadius: '8px',
+    color: '#71767b',
+    cursor: 'pointer',
+    marginTop: '10px',
+  }}
+>
+  <option value="">Select a Contract Address</option>
+  {contracts.map(({ address, name,  }) => (
+    <option key={address} value={address}>
+
+      {name}
+    </option>
+  ))}
+</select>
+<div className={style.or}>or</div>
+  <input
+    type="text"
+    value={nftContractAddress}
+    onChange={handleContractAddressChange} // Handle contract address change
+    placeholder="Paste any NFT Contract Address"
+    maxLength={42}  // Maximum 42 characters
+    minLength={42}  // Minimum 42 characters
+  />
+
+
+
+</div>
+
+  <div className={style.formGroup}>
           <label>NFT TOKEN ID:</label>
           <select
             value={nftId}
@@ -182,17 +230,7 @@ const CreateDuel = ({ onComplete }) => { // Add onComplete prop
             ))}
           </select>
         </div>
-        <div className={style.formGroup}>
-          <label>NFT Contract Address:</label>
-          <input
-            type="text"
-            value={nftContractAddress}
-            onChange={handleContractAddressChange} // Handle contract address change
-            placeholder="Paste any NFT Contract Address"
-            maxLength={42}  // Maximum 42 characters
-            minLength={42}  // Minimum 42 characters
-          />
-        </div>
+
         <div className={style.formGroup}>
           <label>Message:</label>
           <input

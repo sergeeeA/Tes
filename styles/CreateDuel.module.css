@@ -1,4 +1,5 @@
 .createDuelContainer {
+  
     max-width: 500px;
     max-height: 500px;
     margin: 0 auto;
@@ -8,6 +9,7 @@
     background-color: #000000; /* Black background */
     color: #ffffff; /* White text */
     animation: Fade 0.35s forwards ease-in; /* Apply animation */
+ 
   }
   
   @keyframes Fade {
@@ -40,31 +42,34 @@
     animation: Fade 0.75s forwards ease-in; /* Apply animation */
   }
   .createtitle{
+    text-align: center;
     position: relative;
     bottom: 10px;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #fff; /* White for display name */
       animation: Fade 0.5s forwards ease-in; /* Apply animation */
   }
   .canceltitle{
+    text-align: center;
     position: relative;
     bottom: 10px;
-      font-size: 2rem;
+    font-size: 1.5rem;
       font-weight: bold;
       color: #fff; /* White for display name */
       animation: Fade 0.5s forwards ease-in; /* Apply animation */
   }
 .cancelcontainer{
   border-radius: 16px; /* Rounded corners */
-  border: 1px solid #2f3336; /* Dark border */
-  padding: 20px;
+  border: 1px solid #706c539a;
+  padding: 15px;
   word-wrap: break-word; /* Ensures long words or URLs break properly */
   white-space: normal; /* Allows text to wrap */
   margin: 20px;
   animation: Fade 0.55s forwards ease-in; /* Apply animation */
 }
   .createDuelForm {
+    
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -85,12 +90,13 @@
   
   .formGroup input {
     padding: 12px;
-    border: 1px solid #2f3336; /* Dark border */
+    border: 1px solid #706c539a;
     border-radius: 8px; /* Slightly rounded edges */
-    background-color: #000000; /* Black background */
+    background-color: #0e0e0e; /* Black background */
     color: #ffffff; /* White text */
     font-size: 16px;
     outline: none;
+    transition: border-color 0.2s ease-in-out;
   }
   
   .formGroup input::placeholder {
@@ -98,25 +104,33 @@
   }
   
   .formGroup input:focus {
-    border-color: #1d9bf0; /* X's blue accent color */
+    border-color: #ffd900; /* X's blue accent color */
   }
-  
+  .or{
+    text-align: center;
+    color: #71767b;
+
+  }
   .submitButton {
-    padding: 12px;
-    background-color: #1d9bf0; /* X's blue accent color */
-    color: white;
-    border: none;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 1px solid #706c539a;
+    background-color: #00000052;
+    color: #71767b;
+    backdrop-filter: blur(2px); /* Apply background blur */
     border-radius: 25px; /* Fully rounded edges */
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    transition: background-color 0.2s ease;
-    animation: Fade 0.75s forwards ease-in; /* Apply animation */
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
   }
+      .submitButton:hover {
+        color: white;
+        color: #000000;
   
-  .submitButton:hover {
-    background-color: #1a8cd8; /* Slightly darker blue on hover */
-  }
+        transform: translateY(-5px); 
+        background-color: #ffd900; 
+      }
   
   .submitButton:disabled {
     background-color: #1d9bf0; /* X's blue accent color */
@@ -126,19 +140,24 @@
 
   .cancelButton {
     padding: 12px;
-    background-color: #ff0000; /* X's blue accent color */
+
+    background-color: #00000052;
     color: white;
-    border: none;
+    border: 1px solid #706c539a;
     border-radius: 25px; /* Fully rounded edges */
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    transition: background-color 0.2s ease;
-    animation: Fade 0.75s forwards ease-in; /* Apply animation */
 
+
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
   }
   
   .cancelButton:hover {
+
+    color: #000000;
+
+    transform: translateY(-5px); 
     background-color: #d61616; /* Slightly darker blue on hover */
   }
   
@@ -165,4 +184,9 @@
   text-align: center;
   font-size: 25px
  }
- 
+
+ .spinnerContainer{
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+ }
