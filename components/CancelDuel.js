@@ -3,12 +3,13 @@ import { useAppContext } from '../context/context';
 import style from '../styles/CreateDuel.module.css';
 
 const CancelDuel = () => {
-  const { address, activeDuelIds, duelDetails, cancelDuel } = useAppContext();
+  const { address, activeDuelIds, duelDetails, cancelDuel, checkAndSwitchNetwork } = useAppContext();
   const [loading, setLoading] = useState(false);
 
   const addressImages = {
     'Bera outlaws': '/beraoutlaws.jpg',
-    'NFT B': '/beradwellers.jpg',
+    'beradwellers': '/beradwellers.jpg',
+    'beramonium': '/beramonium.png',
     'Unknown Address or Contract': '/unknown.png',
   };
 
@@ -25,12 +26,20 @@ const CancelDuel = () => {
     if (address === '0x7424C334EC67DB47768189696813248bf1a16675') {
       name = 'Bera Outlaws';
       imageSrc = addressImages['Bera outlaws'];
+
     } else if (address === '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05') {
       name = 'Bera Dwellers';
-      imageSrc = addressImages['NFT B'];
+      imageSrc = addressImages['beradwellers'];
+
+    } else if (address === '0x46B4b78d1Cd660819C934e5456363A359fde43f4') {
+      name = 'Beramonium';
+      imageSrc = addressImages['beramonium'];
+
     } else if (address === '?????') {
       name = 'Unknown Address or Contract';
     } else {
+      
+      
       name = shortenAddress(address);
     }
 
@@ -42,7 +51,7 @@ const CancelDuel = () => {
     setLoading(true);
     
     try {
-   
+      await checkAndSwitchNetwork();
       await cancelDuel(duelId);  // Make sure this is correctly interacting with your API or contract
 
     }  finally {
@@ -72,17 +81,19 @@ const CancelDuel = () => {
                 <div className={style.addressWithImage}>
                   <img src={contractImage} alt={contractName} className={style.addressImage} />
                   <span className={style.canceltitle}>
-                    {contractName} {duel.nftId} {duelId}
-                  </span> {/* Display contract name */}
+                    NFT: {contractName} ({duel.nftId})
+                  </span>
                 </div>
-
+                <p className={style.message}>
+                  ID: {duelId}
+                </p> 
                 <p className={style.message}>
                   {duel.message.length > 15 ? `${duel.message.slice(0, 15)}...` : duel.message}
                 </p>
 
                 {/* Cancel Duel Button */}
                 <button
-                    onClick={() => handleCancelDuel(duelId)}  
+                  onClick={() => handleCancelDuel(duelId)}  
                   disabled={loading}
                   className={style.cancelButton}
                 >

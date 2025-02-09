@@ -9,7 +9,7 @@ const APPROVE_ADDRESS = '0xBB115E226095cedbF30C5E6D42a7bDf2Bc6A7787';
 const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
 
 const ChallengeDuel = ({ selectedDuel, onComplete }) => {
-  const { challengeDuel, address } = useAppContext();
+  const { challengeDuel, address, checkAndSwitchNetwork } = useAppContext();
   const [nftId, setNftId] = useState('');
   const [nftContractAddress, setNftContractAddress] = useState('');
   const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ const ChallengeDuel = ({ selectedDuel, onComplete }) => {
 
     }
     
-    return { name, imageSrc };
+    return { name,  };
   };
 
   // Fetch inventory when contract address is updated
@@ -99,10 +99,11 @@ const ChallengeDuel = ({ selectedDuel, onComplete }) => {
     if (!selectedDuel || !selectedTokenId || !nftContractAddress) {
       return;
     }
-
+   
     setLoading(true);
 
     try {
+      await checkAndSwitchNetwork();
       const accounts = await web3.eth.getAccounts();
       if (accounts.length === 0) {
         alert('Please connect your wallet.');
@@ -124,7 +125,7 @@ const ChallengeDuel = ({ selectedDuel, onComplete }) => {
 
       // Wait for the approval transaction to be mined
       await web3.eth.getTransactionReceipt(approveResult.transactionHash);
-
+   
       // Step 2: Challenge the Duel after approval
       await challengeDuel(selectedDuel.duelId, selectedTokenId, contractAddress);
 

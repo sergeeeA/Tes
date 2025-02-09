@@ -8,7 +8,7 @@ const APPROVE_ADDRESS = '0xBB115E226095cedbF30C5E6D42a7bDf2Bc6A7787';
 const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
 
 const CreateDuel = ({ onComplete }) => { // Add onComplete prop
-  const { createDuel, address } = useAppContext();
+  const { createDuel, address, checkAndSwitchNetwork } = useAppContext();
   const [nftId, setNftId] = useState('');
   const [nftContractAddress, setNftContractAddress] = useState('');
   const [message, setMessage] = useState('');
@@ -99,6 +99,7 @@ const handleSubmit = async (e) => {
 
     if (nftContract) {
       try {
+        await checkAndSwitchNetwork();
         const accounts = await web3.eth.getAccounts();
         if (accounts.length === 0) {
           alert('Please connect your wallet.');

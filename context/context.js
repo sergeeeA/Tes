@@ -12,6 +12,8 @@ export const AppProvider = ({ children }) => {
   const [duelDetails, setDuelDetails] = useState([]);
   const [duelHistory, setDuelHistory] = useState([]);  
 
+
+
   useEffect(() => {
     const debounceTimeout = setTimeout(() => {
       if (lotteryContract) {
@@ -113,6 +115,8 @@ const challengeDuel = async (duelId, challengerNftId, nftContractAddress) => {
     return;
   }
 
+
+
   try {
     // Retrieve the DUEL_FEE amount from the contract
 
@@ -144,6 +148,7 @@ const challengeDuel = async (duelId, challengerNftId, nftContractAddress) => {
       return;
     }
 
+
     try {
       const duelFee = await lotteryContract.methods.DUEL_FEE().call();
 
@@ -163,11 +168,12 @@ const challengeDuel = async (duelId, challengerNftId, nftContractAddress) => {
     }
   };
  // New cancelDuel function
-const cancelDuel = async (duelId) => {
+ const cancelDuel = async (duelId) => {
   if (!lotteryContract || !address) {
-
     return;
   }
+
+
 
   try {
     // Estimate gas and send transaction to cancel the duel
@@ -181,12 +187,41 @@ const cancelDuel = async (duelId) => {
       .send({ from: address, gas: gasEstimate });
 
     // After cancelling the duel, refresh the active duel data
+    fetchActiveDuelIds();
+  } catch (error) {
+    console.error('Error canceling duel:', error);
+  }
+};
 
-    fetchActiveDuelIds();  
 
+// Example checkAndSwitchNetwork function without loading delays
+const checkAndSwitchNetwork = async () => {
+  const targetChainId = '0x138D4'; // 80084 in hexadecimal
 
-  } catch  {
-
+  if (window.ethereum) {
+    try {
+      const networkId = await window.ethereum.request({ method: 'eth_chainId' });
+      if (networkId !== targetChainId) {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: targetChainId,
+            chainName: 'Berachain bArtio',
+            rpcUrls: ['https://bartio.rpc.berachain.com/'],
+            nativeCurrency: {
+              name: 'Berachain-bArtio',
+              symbol: 'BERA',
+              decimals: 18,
+            },
+            blockExplorerUrls: ['https://bartio.beratrail.io'],
+          }],
+        });
+      }
+    } catch (error) {
+      console.error('Failed to switch network:', error);
+    }
+  } else {
+    console.log('MetaMask is not installed.');
   }
 };
 
@@ -196,32 +231,38 @@ const connectWallet = async () => {
   if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+      // Check and switch network if needed
+      await checkAndSwitchNetwork();
+
       const web3 = new Web3(window.ethereum); // Initialize Web3 here
       setWeb3(web3);  // Store web3 in context
       const accounts = await web3.eth.getAccounts();
       setAddress(accounts[0]);
-  
+
       // Initialize the lottery contract after connecting the wallet
       const lotteryContractInstance = createLotteryContract(web3);
       setLotteryContract(lotteryContractInstance);
-
 
       window.ethereum.on('accountsChanged', async () => {
         const accounts = await web3.eth.getAccounts();
         setAddress(accounts[0]);
       });
     } catch (err) {
-
+      console.error('Error connecting wallet:', err);
     }
   } else {
-
+    console.log('Ethereum is not available.');
   }
 };
+
 
   return (
     <appContext.Provider
       value={{
         address,
+       
+
         connectWallet,
 
         fetchDuelData,
@@ -234,7 +275,7 @@ const connectWallet = async () => {
         challengeDuel,
         createDuel,
         cancelDuel, 
-
+        checkAndSwitchNetwork,
         lotteryContract, 
       }}
     >

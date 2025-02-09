@@ -2,39 +2,10 @@ import { useAppContext } from '../context/context';
 import style from '../styles/Connect.module.css';
 import { useMemo, useEffect, useRef } from 'react';
 
-// Function to check and switch network
-const checkAndSwitchNetwork = async () => {
-  const targetChainId = '0x138D4'; // 80084 in hexadecimal
 
-  if (window.ethereum) {
-    try {
-      const networkId = await window.ethereum.request({ method: 'eth_chainId' });
-      if (networkId !== targetChainId) {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: targetChainId,
-            chainName: 'Berachain bArtio',
-            rpcUrls: ['https://bartio.rpc.berachain.com/'],
-            nativeCurrency: {
-              name: 'Berachain-bArtio',
-              symbol: 'BERA',
-              decimals: 18,
-            },
-            blockExplorerUrls: ['https://bartio.beratrail.io'],
-          }],
-        });
-      }
-    } catch (error) {
-      console.error('Failed to switch network:', error);
-    }
-  } else {
-    console.log('MetaMask is not installed.');
-  }
-};
 
 const WalletConnectBtn = () => {
-  const { connectWallet, address, duelHistory, fetchDuelHistory } = useAppContext(); 
+  const { connectWallet, address, duelHistory, fetchDuelHistory, checkAndSwitchNetwork  } = useAppContext(); 
 
   const hasFetched = useRef(false); 
 
@@ -50,7 +21,7 @@ const WalletConnectBtn = () => {
 
   const handleConnectWallet = async () => {
     await connectWallet(); 
-    await checkAndSwitchNetwork(); 
+    await checkAndSwitchNetwork();
   };
 
   // Shorten the address to the first 6 and last 4 characters
