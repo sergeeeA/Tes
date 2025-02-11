@@ -1,6 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
-
 .wrapper {
   background-color: #000;
   min-height: 100vh;
@@ -9,7 +7,7 @@
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Astrolab';
   
 } 
 
@@ -43,7 +41,7 @@ z-index: 1;
   border-top: none;
   border-left: none;
   border-right: none;
-  font-size: 1rem;
+  font-size: 0.5rem;
   padding: 10px;
 
   text-align: center;
@@ -57,7 +55,7 @@ z-index: 1;
   border-left: 1px solid #706c539a;
   border-right: 1px solid #706c539a;
   background-color: #000;
-  font-size: 1rem;
+  font-size: 0.6rem;
   border-radius: 7px 7px 0 0; /* Top-left and top-right radius */
   text-align: center;
   color: #fff;
@@ -71,7 +69,7 @@ z-index: 1;
 padding: 15px;
 }
 .contractGroup{
-
+  font-size: 0.6rem;
   border-bottom: 1px solid #1a1818;
 
 }
@@ -174,14 +172,14 @@ padding: 15px;
 .nftId {
   position: relative;
   bottom: 5px;
-  font-size: 1rem;
+  font-size: 0.5rem;
   font-weight: bold;
   color: #fff; /* White for display name */
 }
 .creator {
   position: relative;
   bottom: 5px;
-  font-size: 0.9rem;
+  font-size: 0.4rem;
   color: #71767b; /* Light gray for @handle */
 }
 .messageduel {
@@ -189,7 +187,7 @@ padding: 15px;
   left:   95px;
   position: relative;
   display: flex;
-  font-size: 0.9rem;
+  font-size: 0.4rem;
   color: #e7e9ea; /* Light gray for tweet text */
   
   margin: 0.5rem 0;
@@ -201,7 +199,7 @@ padding: 15px;
   left:   55px;
   position: relative;
   display: flex;
-  font-size: 0.9rem;
+  font-size: 0.4rem;
   color: #e7e9ea; /* Light gray for tweet text */
   
   margin: 0.5rem 0;
@@ -222,18 +220,18 @@ padding: 15px;
   position: relative;
 
   color: #657786; /* Gray text */
-  font-size: 0.75rem;
+  font-size: 0.5rem;
 }
 .ID {
   position: relative;
   color: #ffffff; /* Gray text */
-  font-size: 0.75rem;
+  font-size: 0.5rem;
 }
 .duelID {
   position: relative;
 
   color: #ffffff; /* Gray text */
-  font-size: 0.75rem;
+  font-size: 0.5rem;
 }
 
 /* No Duels Message */
@@ -295,7 +293,8 @@ padding: 15px;
   width: 100%; /* Make the search bar take up the full width of its container */
   max-width: 400px; /* Limit the maximum width for better readability */
   padding: 10px 15px; /* Add padding for better spacing inside the input */
-  font-size: 16px; /* Increase font size for better readability */
+  font-size: 9px; /* Increase font size for better readability */
+  font-family: 'Astrolab';
   border: 1px solid #2f3336; /* Add a border */
   border-radius: 25px; /* Round the corners */
   outline: none; /* Remove the default outline */

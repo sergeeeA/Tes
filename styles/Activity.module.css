@@ -1,6 +1,7 @@
+
 .wrapper {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px; /* Smaller font size for contract and other details */
+  font-family: 'Astrolab';
+    font-size: 7px; /* Smaller font size for contract and other details */
     overflow: hidden;
     align-items: center;
     justify-content: center;

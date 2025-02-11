@@ -127,7 +127,12 @@ export default function Home() {
       {/* Footer */}
       <div className={homeStyle.footer}>
         
- 
+      <button
+          className={homeStyle.createDuelButtonMobile}
+          onClick={() => setShowCreateDuel(true)}
+        >
+          Create Duel
+        </button>
 
         <button
           className={homeStyle.cancelDuelButtonMobile}
@@ -135,12 +140,7 @@ export default function Home() {
         >
           Cancel Duel
         </button>
-        <button
-          className={homeStyle.createDuelButtonMobile}
-          onClick={() => setShowCreateDuel(true)}
-        >
-          Create Duel
-        </button>
+     
    
         <WalletConnectBtn />
         <button

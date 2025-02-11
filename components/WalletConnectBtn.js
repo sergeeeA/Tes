@@ -5,23 +5,35 @@ import { useMemo, useEffect, useRef } from 'react';
 
 
 const WalletConnectBtn = () => {
-  const { connectWallet, address, duelHistory, fetchDuelHistory, checkAndSwitchNetwork  } = useAppContext(); 
+  const { connectWallet, 
+    address, 
+    duelHistory, 
+    fetchDuelHistory, 
+    checkAndSwitchNetwork,
+    fetchDuelData,  } = useAppContext(); 
 
   const hasFetched = useRef(false); 
 
  
   useEffect(() => {
+    // Ensure fetchDuelHistory only runs after wallet is connected (address is available)
     if (address && !hasFetched.current) {
-
-      fetchDuelHistory(1); 
-      hasFetched.current = true; 
+      fetchDuelHistory(1);
+      hasFetched.current = true;
     }
-  }, [address, fetchDuelHistory]);
+
+    // Fetch duel data only when address is available
+    if (address) {
+      fetchDuelData(); 
+    }
+
+  }, [address, fetchDuelHistory, fetchDuelData]);
 
 
   const handleConnectWallet = async () => {
     await connectWallet(); 
     await checkAndSwitchNetwork();
+
   };
 
   // Shorten the address to the first 6 and last 4 characters

@@ -165,7 +165,7 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className={style.createDuelContainer}>
+    <div className={style.createDuelContainer} >
       <h2 className={style.createtitle}>Create a New Duel</h2>
       <form onSubmit={handleSubmit} className={style.createDuelForm}>
       
@@ -177,33 +177,39 @@ const handleSubmit = async (e) => {
   onChange={(e) => setNftContractAddress(e.target.value)} // Handle selection change
   style={{
     padding: '12px',
-    fontSize: '15px',
+    fontSize: '8px',
     backgroundColor: '#000',
     border: '1px solid#2f3336',
     borderRadius: '8px',
     color: '#71767b',
     cursor: 'pointer',
     marginTop: '10px',
+    fontFamily: 'Astrolab, sans-serif',
+    
   }}
 >
-  <option value="">Select a Contract Address</option>
+  <option value="" >
+    Select a Contract Address
+    </option>
+
   {contracts.map(({ address, name,  }) => (
-    <option key={address} value={address}>
+    <option key={address} value={address} 
+    style={{ fontFamily: 'Astrolab, sans-serif', fontSize: '8px' }}>
 
       {name}
     </option>
   ))}
 </select>
 <div className={style.or}>or</div>
-  <input
-    type="text"
-    value={nftContractAddress}
-    onChange={handleContractAddressChange} // Handle contract address change
-    placeholder="Paste any NFT Contract Address"
-    maxLength={42}  // Maximum 42 characters
-    minLength={42}  // Minimum 42 characters
-  />
-
+<input
+  type="text"
+  value={nftContractAddress}
+  onChange={handleContractAddressChange} // Handle contract address change
+  placeholder="Paste any NFT Contract Address"
+  maxLength={42}  // Maximum 42 characters
+  minLength={42}  // Minimum 42 characters
+  style={{ fontFamily: 'Astrolab, sans-serif', fontSize: '8px' }} // Add the font family style here
+/>
 
 
 </div>
@@ -215,12 +221,13 @@ const handleSubmit = async (e) => {
             onChange={(e) => setNftId(e.target.value)}
             style={{
               padding: '12px',
-              fontSize: '15px',
+              fontSize: '8px',
               backgroundColor: '#000',
               border: '1px solid#2f3336',
               borderRadius: '8px',
               color: '#71767b',
               cursor: 'pointer',
+              fontFamily: 'Astrolab, sans-serif', 
             }}
           >
             <option value="">Select Token ID</option>
@@ -239,10 +246,11 @@ const handleSubmit = async (e) => {
             value={message}
             onChange={handleMessageChange}
             placeholder="Optional"
-            maxLength={55}
+            maxLength={15}
+            style={{ fontFamily: 'Astrolab, sans-serif', fontSize: '8px' }}
           />
-          {message.length === 55 && (
-            <p className={style.limitNotification}>Character limit reached!</p>
+          {message.length === 15 && (
+            <p style={{ fontFamily: 'Astrolab, sans-serif', fontSize: '8px', color: 'red' }} >Character limit reached!</p>
           )}
         </div>
         {loading ? (

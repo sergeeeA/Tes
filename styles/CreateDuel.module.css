@@ -1,5 +1,6 @@
+
 .createDuelContainer {
-  
+  font-family: 'Astrolab';
     max-width: 500px;
     max-height: 500px;
     margin: 0 auto;
@@ -33,7 +34,7 @@
     left:   47px;
     position: relative;
   
-    font-size: 0.9rem;
+    font-size: 0.5rem;
     color: #e7e9ea; /* Light gray for tweet text */
     margin: 0.5rem 0;
     line-height: 1.5;
@@ -45,7 +46,7 @@
     text-align: center;
     position: relative;
     bottom: 10px;
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-weight: bold;
       color: #fff; /* White for display name */
       animation: Fade 0.5s forwards ease-in; /* Apply animation */
@@ -54,7 +55,7 @@
     text-align: center;
     position: relative;
     bottom: 10px;
-    font-size: 1.5rem;
+    font-size: 10px;
       font-weight: bold;
       color: #fff; /* White for display name */
       animation: Fade 0.5s forwards ease-in; /* Apply animation */
@@ -77,6 +78,7 @@
   }
   
   .formGroup {
+    
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -94,16 +96,19 @@
     border-radius: 8px; /* Slightly rounded edges */
     background-color: #0e0e0e; /* Black background */
     color: #ffffff; /* White text */
-    font-size: 16px;
+    font-size: 10px;
+  
     outline: none;
     transition: border-color 0.2s ease-in-out;
   }
   
   .formGroup input::placeholder {
+    font-family: 'Astrolab';
     color: #71767b; /* Light gray placeholder text */
   }
   
   .formGroup input:focus {
+    
     border-color: #ffd900; /* X's blue accent color */
   }
   .or{
@@ -121,7 +126,8 @@
     border-radius: 25px; /* Fully rounded edges */
     cursor: pointer;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 10px;
+    font-family: 'Astrolab';
     transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, ;
   }
       .submitButton:hover {
@@ -140,7 +146,7 @@
 
   .cancelButton {
     padding: 12px;
-
+    font-family: 'Astrolab';
     background-color: #00000052;
     color: white;
     border: 1px solid #706c539a;

@@ -160,12 +160,13 @@ const ChallengeDuel = ({ selectedDuel, onComplete }) => {
               <select
                 style={{
                   padding: '12px',
-                  fontSize: '15px',
+                  fontSize: '8px',
                   backgroundColor: '#000',
                   border: '1px solid#2f3336',
                   borderRadius: '8px',
                   color: '#71767b',
                   cursor: 'pointer',
+                  fontFamily: 'Astrolab, sans-serif',
                 }}
                 id="nftId"
                 value={nftId}
@@ -195,12 +196,13 @@ const ChallengeDuel = ({ selectedDuel, onComplete }) => {
               readOnly
               style={{
                 padding: '12px',
-                fontSize: '15px',
+                fontSize: '8px',
                 backgroundColor: '#000',
                 border: '1px solid#2f3336',
                 borderRadius: '8px',
                 color: '#71767b',
                 cursor: 'pointer',
+                fontFamily: 'Astrolab, sans-serif',
               }}
             />
           </div>

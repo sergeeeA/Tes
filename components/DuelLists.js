@@ -96,7 +96,7 @@ const Duel = () => {
   const filteredDuelHistory = useMemo(() => {
     const sortedDuels = [...duelHistory].sort((a, b) => b.duelId - a.duelId);
     const filtered = sortedDuels.filter((duel) => duel.winner === address || duel.loser === address);
-    return filtered.slice(0, 25); // Limit to the most recent 10 duels
+    return filtered.slice(0, 25); // Limit to the most recent 25 2 duels
   }, [duelHistory, address]);
 
   const newAnimatedDuels = useMemo(() => {
@@ -270,6 +270,7 @@ const Duel = () => {
       ) : (
 
     <div className={style.duelContainer}>
+      Showing the latest 25 duels
       {filteredDuelHistory.length > 0 ? (
         <>
     
