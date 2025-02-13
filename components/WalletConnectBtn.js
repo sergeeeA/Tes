@@ -16,18 +16,23 @@ const WalletConnectBtn = () => {
 
  
   useEffect(() => {
-    // Ensure fetchDuelHistory only runs after wallet is connected (address is available)
-    if (address && !hasFetched.current) {
-      fetchDuelHistory(1);
-      hasFetched.current = true;
-    }
-
-    // Fetch duel data only when address is available
-    if (address) {
-      fetchDuelData(); 
-    }
-
-  }, [address, fetchDuelHistory, fetchDuelData]);
+    const fetchData = async () => {
+      if (address && !hasFetched.current) {
+        await fetchDuelHistory(1);
+        hasFetched.current = true;
+      }
+  
+      if (address) {
+        await fetchDuelData();
+      }
+    };
+  
+    fetchData();
+  
+    return () => {
+      // Cleanup logic (e.g., cancel pending requests or subscriptions)
+    };
+  }, [address]);
 
 
   const handleConnectWallet = async () => {
